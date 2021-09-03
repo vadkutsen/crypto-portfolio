@@ -5,7 +5,7 @@ const schema = new Schema({
     quantity: {type: String, required: true},
     name: {type: String, required: true},
     date: {type: Date, default: Date.now},
-    owner: {type: Types.ObjectId, ref: 'User'}
+    owner: {type: Types.ObjectId, ref: 'User'},
 })
 
 module.exports = model('Asset', schema)

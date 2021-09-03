@@ -1,0 +1,21 @@
+{
+    "ProfileTitle": "Profile",
+    "Name": "Name",
+    "ErrorMessageNameRequired": "Name is required",
+    "Update": "Update",
+    "Menu_Assets": "Assets",
+    "Menu_History": "History",
+    "Menu_Planning": "Planning",
+    "Menu_NewRecord": "New Record",
+    "Menu_Categories": "Categories",
+    "Nav_Profile": "Profile",
+    "Nav_SignOut": "Sign Out",
+    "Detail": "Detail",
+    "Home": "Home",
+    "Login": "Login",
+    "SignUp": "Sign Up",
+    "LogoutMessage": "Logged out successfully",
+    "LoginMessage": "Welcome to Vue CRM",
+    "InvalidEmailPasswordMessage": "Invalid email or password",
+    "EmailInUseMessage": "Email already in use"
+}

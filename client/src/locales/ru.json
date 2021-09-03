@@ -1,0 +1,21 @@
+{
+    "ProfileTitle": "Профиль",
+    "Name": "Имя",
+    "ErrorMessageNameRequired": "Введите имя",
+    "Update": "Обновить",
+    "Menu_Assets": "Активы",
+    "Menu_History": "История",
+    "Menu_Planning": "Планироваеие",
+    "Menu_NewRecord": "Новая Запись",
+    "Menu_Categories": "Категории",
+    "Nav_Profile": "Профиль",
+    "Nav_SignOut": "Выход",
+    "Detail": "Подробно",
+    "Home": "Главная",
+    "Login": "Вход",
+    "SignUp": "Регистрация",
+    "LogoutMessage": "Успешно вышли из системы",
+    "LoginMessage": "Добро пожаловать в Vue CRM",
+    "InvalidEmailPasswordMessage": "Неправильный email или пароль",
+    "EmailInUseMessage": "Email уже используется"
+}
