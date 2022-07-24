@@ -10,4 +10,13 @@ router.get('/', auth, assetController.getAssets)
 
 router.get('/:symbol', auth, assetController.getAsset)
 
+/* GET asset edit /asset/:symbol/edit */
+router.get('/:symbol/edit', auth, assetController.editAsset)
+
+/* PUT asset update /asset/:symbol */
+router.put('/:symbol', auth, assetController.updateAsset)
+
+/* DELETE asset destroy /asset/:id */
+router.delete('/:id', auth, assetController.deleteAsset);
+
 module.exports = router

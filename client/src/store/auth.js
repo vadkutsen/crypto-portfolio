@@ -1,12 +1,5 @@
 import AuthService from '@/services/AuthService.js'
 
-// const apiClient = axios.create({
-//   baseURL: 'http://localhost:5000/api',
-//   headers: {
-//     Accept: 'application/json',
-//   },
-// })
-
 export default {
   actions: {
     // eslint-disable-next-line no-unused-vars

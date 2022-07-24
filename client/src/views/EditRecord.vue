@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="page-title">
-            <h3>New Trade</h3>
+            <h3>Edit Record</h3>
         </div>
         <Loader v-if="loading"/>
         <form v-else class="form" @submit.prevent="submitHandler">
@@ -68,23 +68,25 @@
             <div class="input-field">
               <input
                   id="targetPrice"
-                  type="text"
-                  v-model="targetPrice"
+                  type="number"
+                  step="0.00000001"
+                  min="0"
+                  v-model.number="targetPrice"
               >
               <label for="targetPrice">Target Price</label>
             </div>
 
             <div class="input-field">
               <input
-                  id="location"
+                  id="notes"
                   type="text"
-                  v-model="location"
+                  v-model="notes"
               >
-              <label for="location">Location</label>
+              <label for="notes">Notes</label>
             </div>
 
             <button class="btn waves-effect waves-light" type="submit">
-            Create
+            Update
             <i class="material-icons right">send</i>
             </button>
         </form>
@@ -94,23 +96,34 @@
 import { mapGetters } from 'vuex';
 
 export default {
+  // props: ['item'],
   metaInfo() {
     return {
-      title: this.$title('Menu_NewRecord'),
+      title: this.$title('Menu_EditRecord'),
     };
   },
-  name: 'record',
+  name: 'edit',
   data: () => ({
     loading: true,
     name: '',
-    quantity: null,
-    price: null,
+    quantity: '',
+    price: '',
     targetPrice: '',
-    location: '',
     type: 'buy',
+    notes: ''
   }),
   async mounted() {
     this.loading = false;
+    const id = this.$route.params.id;
+    this.asset = await this.$store.dispatch('fetchAssetById', id);
+    // const asset = await this.$store.dispatch('fetchAssetById', this.$route.params.id)
+    console.log(this.asset)
+    this.name = this.asset.name
+    this.quantity = this.asset.quantity
+    this.price = this.asset.price
+    this.targetPrice = this.asset.targetPrice
+    this.type = this.asset.type
+    this.notes = this.asset.notes
   },
   computed: {
     ...mapGetters(['info']),
@@ -122,32 +135,30 @@ export default {
     // },
   },
   methods: {
-    async submitHandler() {
-        try {
-          await this.$store.dispatch('createRecord', {
-            name: this.name.toUpperCase(),
-            quantity: this.quantity,
-            price: this.price,
-            type: this.type,
-            targetPrice: this.targetPrice,
-            location: this.location,
-          });
-          M.toast({ html: 'Record successfully created' });
-          // Reset form
-          this.name = '';
-          this.quantity = null;
-          this.price = null;
-          this.targetPrice = '';
-          this.location = '';
-          this.type = 'buy'
-        } catch (e) {
-          console.log(e.message);
-        }
+    // async submitHandler() {
+    //     try {
+    //       await this.$store.dispatch('createRecord', {
+    //         name: this.name.toUpperCase(),
+    //         quantity: this.quantity,
+    //         price: this.price,
+    //         type: this.type,
+    //         targetPrice: this.targetPrice,
+    //       });
+    //       M.toast({ html: 'Record successfully created' });
+    //       // Reset form
+    //       this.name = '';
+    //       this.quantity = null;
+    //       this.price = null;
+    //       this.targetPrice = null;
+    //       this.type = 'buy'
+    //     } catch (e) {
+    //       console.log(e.message);
+    //     }
       // } else {
         // eslint-disable-next-line no-undef
         // M.toast({ html: `Not enough account balance (${this.amount - this.info.bill})` });
       // }
-    },
+    // },
   },
   destroyed() {
     if (this.select && this.select.destroy) {

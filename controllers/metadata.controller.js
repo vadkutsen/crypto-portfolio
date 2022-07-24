@@ -13,8 +13,8 @@ const getLogo = async (req, res, next) => {
     try {
         const response = await axiosInstance.get('/cryptocurrency/info?symbol=' + req.query.symbol.toLowerCase())
         // process your data and send back to the user
-        const logo = response.data[0].logo
-        res.status(200).json(logo)
+        // const logo = response.data[0].logo
+        res.status(200).json(response.data)
     } catch (err) {
         res.status(500).json({ message: 'Something went wrong. Please try again.' + err})
     }

@@ -5,7 +5,7 @@ import info from './info';
 import category from './category';
 import record from './record';
 import AssetService from '../services/AssetService'
-import PriceService from '../services/PriceService'
+// import PriceService from '../services/PriceService'
 
 
 Vue.use(Vuex);
@@ -35,10 +35,15 @@ export default new Vuex.Store({
       const res = await AssetService.getAssets()
       return res.data;
     },
-    async fetchPrices() {
-      const res = await PriceService.getPrices()
+    async fetchAssetById({}, id) {
+      const res = await AssetService.getAssetById(id)
+      console.log('store id: ' + id)
       return res.data;
     },
+    // async fetchPrices() {
+    //   const res = await PriceService.getPrices()
+    //   return res.data;
+    // },
   },
 
   getters: {

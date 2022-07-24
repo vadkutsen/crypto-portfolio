@@ -54,10 +54,16 @@ const routes = [
     component: () => import('../views/Record.vue'),
   },
   {
-    path: '/detail/:id',
+    path: '/asset/:id',
     name: 'detail',
     meta: { layout: 'main', auth: true },
     component: () => import('../views/Detail.vue'),
+  },
+  {
+    path: '/asset/:id/edit',
+    name: 'edit',
+    meta: { layout: 'main', auth: true },
+    component: () => import('../views/EditRecord.vue'),
   },
 ];
 

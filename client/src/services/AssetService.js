@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { json } from 'express'
+import { get } from 'lodash'
 
 const token = localStorage.getItem('token')
 
@@ -19,17 +19,34 @@ export default {
       assetNames.add(asset.name)
     })
     const prices = await apiClient.get('/price?symbol=' + Array.from(assetNames))
-    console.log('prices.data: ' + prices.data)
-    let assetsWithCurrentPrice = []
     assets.data.forEach(asset => {
-      const price = prices.data.filter((p) => p.key() === asset.name).quote.USD.price
-      assetsWithCurrentPrice.push(...asset, {currentPrice: price})
+      for (const price in prices.data.data) {
+        if(price === asset.name) {
+          const symbolPrice = _.get(prices.data.data, [price, 'quote', 'USD', 'price'], {})
+          asset.currentPrice = symbolPrice.toFixed(6)
+        }
+      }
     })
-    console.log(assetsWithCurrentPrice)
-    return assetsWithCurrentPrice
+    const info = await apiClient.get('/metadata?symbol=' + Array.from(assetNames))
+    assets.data.forEach(asset => {
+      for (const symbol in info.data.data) {
+        if(symbol === asset.name) {
+          const logo = _.get(info.data.data, [symbol, 'logo'], {})
+          asset.logo = logo
+        }
+      }
+    })
+    return assets
+  },
+
+  async getAssetById(id) {
+    const res = await apiClient.get('/asset/' + id)
+    console.log('server response: ' + Array.from(res))
+    return res
   },
 
   async createAsset(asset) {
     return await apiClient.post('/asset', asset)
   },
+
 }
